@@ -1,0 +1,982 @@
+import java.sql.*;
+import java.io.*;
+import java.util.*;
+import java.util.Calendar;
+
+class staff
+{
+    String sname, desg, sex;
+    int salary,sid;
+    void new_staff()
+    {
+        JTextField sf1,sf2,sf3,sf4,sf5;  
+    JButton b1;
+    JLabel sl1,sl2,sl3,sl4,sf5;
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+          sl1=new JLabel("id:-");  
+    sl1.setBounds(50,50, 100,30); 
+        sf1=new JTextField();  
+        sf1.setBounds(50,50,150,20);  
+         sl2=new JLabel("name:-");  
+    sl2.setBounds(50,50, 100,30); 
+        sf2=new JTextField();  
+        sf2.setBounds(50,100,150,20);
+         sl3=new JLabel("designation:-");  
+    sl3.setBounds(50,50, 100,30); 
+        sf3=new JTextField();  
+        sf3.setBounds(50,150,150,20); 
+         sl4=new JLabel("sex:-");  
+    sl4.setBounds(50,50, 100,30); 
+        sf4=new JTextField();
+        sf4.setBounds(50,200,150,20);   
+        sl5=new JLabel("salary:-");  
+    sl5.setBounds(50,50, 100,30); 
+        sf5=new JTextField();
+        sf5.setBounds(50,200,150,20);  
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(sf1);f.add(sf2);f.add(sf3);f.add(sf4);f.add(sf5);f.add(b1);f.add(sl1);f.add(sl2);f.add(sl3);f.add(sl4);f.add(sl5);
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+        Scanner input = new Scanner(System.in);
+        System.out.print("id:-");
+        sid = input.nextInt();
+        System.out.print("name:-");
+        sname = input.nextLine();
+        System.out.print("desigination:-");
+        desg = input.nextLine();
+        System.out.print("sex:-");
+        sex = input.nextLine();
+        System.out.print("salary:-");
+        salary = input.nextInt();
+    }
+    void staff_info()
+    {
+        System.out.println(sid + "\t" + sname + "\t" + sex + "\t" + salary);
+   
+        
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into staff "
+			+ " (sid,sname,desg,sex,salary )" + " values (?, ?, ?, ?, ?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	
+	myStmt.setInt(1, sid);
+	myStmt.setString(2, sname);
+	myStmt.setString(3, desg);
+        myStmt.setString(4, sex);
+	myStmt.setInt(5, salary);
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+  }
+}
+class doctor
+{
+    String dname, specilist, appoint, doc_qual;
+    int droom,did;
+    void new_doctor()
+    {
+         JTextField df1,df2,df3,df4,df5; 
+    JButton b1;
+     JLabel dl1,dl2,dl3,dl4,dl5;
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+         dl1=new JLabel("id:-");  
+    dl1.setBounds(50,50, 100,30); 
+        df1=new JTextField();  
+        df1.setBounds(50,50,150,20);  
+         dl2=new JLabel("name:-");  
+    dl2.setBounds(50,50, 100,30); 
+        df2=new JTextField();  
+        df2.setBounds(50,100,150,20);  
+         dl3=new JLabel("specilization:-");  
+    dl3.setBounds(50,50, 100,30); 
+        df3=new JTextField();  
+        df3.setBounds(50,150,150,20); 
+          dl4=new JLabel("work time:-");  
+    dl4.setBounds(50,50, 100,30); 
+        df4=new JTextField();
+        df4.setBounds(50,200,150,20);   
+         dl4=new JLabel("qualification:-");  
+    dl4.setBounds(50,50, 100,30); 
+        df4=new JTextField();
+        df4.setBounds(50,200,150,20);   
+         dl5=new JLabel("room no.:-");  
+    dl5.setBounds(50,50, 100,30); 
+        df5=new JTextField();
+        df5.setBounds(50,200,150,20);   
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(df1);f.add(df2);f.add(df3);f.add(df4);f.add(df5);f.add(b1);f.add(dl1);f.add(dl2);f.add(dl3);f.add(dl4);f.add(dl5);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+        Scanner input = new Scanner(System.in);
+        System.out.print("id:-");
+        did = input.nextInt();
+        System.out.print("name:-");
+        dname = input.nextLine();
+        System.out.print("specilization:-");
+        specilist = input.nextLine();
+        System.out.print("work time:-");
+        appoint = input.nextLine();
+        System.out.print("qualification:-");
+        doc_qual = input.nextLine();
+        System.out.print("room no.:-");
+        droom = input.nextInt();
+    }
+    void doctor_info()
+    {
+        System.out.println(did + "\t" + dname + "  \t" + specilist + "     \t" + appoint + "    \t" + doc_qual + "       \t" + droom);
+    
+        
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into doctor "
+			+ " (did,dname ,specilist,appoint,doc_qual,droom)" + " values (?, ?, ?, ?, ?, ?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	// set param values
+	myStmt.setInt(1, did);
+	myStmt.setString(2, dname);
+	myStmt.setString(3, specilist);
+        myStmt.setString(4, appoint);
+        myStmt.setString(5, doc_qual);
+        myStmt.setInt(6, droom);
+	// 3. Execute SQL query
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+}
+}
+class TextFieldforstaff
+{
+    JTextField sf1,sf2,sf3,sf4;  
+    JButton b1;
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+        
+        sf1=new JTextField();  
+        sf1.setBounds(50,50,150,20);  
+        sf2=new JTextField();  
+        sf2.setBounds(50,100,150,20);  
+        sf3=new JTextField();  
+        sf3.setBounds(50,150,150,20);  
+        sf4=new JTextField();
+        sf4.setBounds(50,200,150,20);   
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(sf1);f.add(sf2);f.add(sf3);f.add(tf4);f.add(b1);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+    }   
+     class TextFieldExampledoctor 
+    {
+        JTextField df1,df2,df3,df4;  
+        JButton b1;
+        JFrame f= new JFrame();    
+        TextFieldExample(){  
+            
+            df1=new JTextField();  
+            df1.setBounds(50,50,150,20);  
+            df2=new JTextField();  
+            df2.setBounds(50,100,150,20);  
+            df3=new JTextField();  
+            df3.setBounds(50,150,150,20);  
+            df4=new JTextField();
+            df4.setBounds(50,200,150,20);   
+            b1=new JButton("submit");  
+            b1.setBounds(50,250,50,50);  
+            b1.addActionListener(this);  
+            f.add(df1);f.add(df2);f.add(df3);f.add(df4);f.add(b1);  
+            f.setSize(300,300);  
+            f.setLayout(null);  
+            f.setVisible(true);  
+        }              
+        class TextFieldExamplepatient
+{
+    JTextField pf1,pf2,pf3,pf4;  
+    JButton b1;
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+        
+        pf1=new JTextField();  
+        pf1.setBounds(50,50,150,20);  
+        pf2=new JTextField();  
+        pf2.setBounds(50,100,150,20);  
+        pf3=new JTextField();  
+        pf3.setBounds(50,150,150,20);  
+        pf4=new JTextField();
+        pf4.setBounds(50,200,150,20);   
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(pf1);f.add(pf2);f.add(pf3);f.add(pf4);f.add(b1);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+    }         
+    class TextFieldExamplemedical 
+    {
+        JTextField mf1,mf2,mf3,mf4;  
+        JButton b1;
+        JFrame f= new JFrame();    
+        TextFieldExample(){  
+            
+            mf1=new JTextField();  
+            mf1.setBounds(50,50,150,20);  
+            mf2=new JTextField();  
+            mf2.setBounds(50,100,150,20);  
+            mf3=new JTextField();  
+            mf3.setBounds(50,150,150,20);  
+            mf4=new JTextField();
+            mf4.setBounds(50,200,150,20);   
+            b1=new JButton("submit");  
+            b1.setBounds(50,250,50,50);  
+            b1.addActionListener(this);  
+            f.add(mf1);f.add(mf2);f.add(mf3);f.add(mf4);f.add(b1);  
+            f.setSize(300,300);  
+            f.setLayout(null);  
+            f.setVisible(true);  
+        }      
+        class TextFieldExamplelab
+{
+    JTextField lf1,lf2,lf3,lf4;  
+    JButton b1;
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+        
+        lf1=new JTextField();  
+        lf1.setBounds(50,50,150,20);  
+        lf2=new JTextField();  
+        lf2.setBounds(50,100,150,20);  
+        lf3=new JTextField();  
+        lf3.setBounds(50,150,150,20);  
+        lf4=new JTextField();
+        lf4.setBounds(50,200,150,20);   
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(lf1);f.add(lf2);f.add(lf3);f.add(lf4);f.add(b1);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+    }            
+    class TextFieldExamplefecility
+    {
+        JTextField cf1,cf2,cf3,cf4;  
+        JButton b1;
+        JFrame f= new JFrame();    
+        TextFieldExample(){  
+            
+            cf1=new JTextField();  
+            cf1.setBounds(50,50,150,20);  
+            cf2=new JTextField();  
+            cf2.setBounds(50,100,150,20);  
+            cf3=new JTextField();  
+            cf3.setBounds(50,150,150,20);  
+            cf4=new JTextField();
+            cf4.setBounds(50,200,150,20);   
+            b1=new JButton("submit");  
+            b1.setBounds(50,250,50,50);  
+            b1.addActionListener(this);  
+            f.add(cf1);f.add(cf2);f.add(cf3);f.add(cf4);f.add(b1);  
+            f.setSize(300,300);  
+            f.setLayout(null);  
+            f.setVisible(true);  
+        }         
+class patient
+{
+    String pname, disease, sex, admit_status;
+    int pid,age;
+    void new_patient()
+    {
+         JTextField pf1,pf2,pf3,pf4pf5,pf6;  
+    JButton b1;
+     JLabel pl1,pl2,pl3,pl4,pl5,pl6; 
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+          pl1=new JLabel("id:-");  
+    pl1.setBounds(50,50, 100,30);  
+        pf1=new JTextField();  
+        pf1.setBounds(50,50,150,20);  
+          pl2=new JLabel("name:-");  
+    pl2.setBounds(50,50, 100,30);  
+        pf2=new JTextField();  
+        pf2.setBounds(50,100,150,20); 
+           pl3=new JLabel("disease:-");  
+    pl3.setBounds(50,50, 100,30);  
+        pf3=new JTextField();  
+        pf3.setBounds(50,150,150,20);  
+           pl4=new JLabel("sex:-");  
+    pl4.setBounds(50,50, 100,30); 
+        pf4=new JTextField();
+        pf4.setBounds(50,200,150,20);   
+           pl5=new JLabel("admit_status:-");  
+    pl5.setBounds(50,50, 100,30); 
+        pf5=new JTextField();
+        pf5.setBounds(50,200,150,20);   
+         pl6=new JLabel("age:-");  
+    pl6.setBounds(50,50, 100,30); 
+        pf6=new JTextField();
+        pf6.setBounds(50,200,150,20);   
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(pf1);f.add(pf2);f.add(pf3);f.add(pf4);f.add(pf5);f.add(pf6);f.add(b1);f.add(pl1);f.add(pl2);f.add(pl3);f.add(pl4);f.add(pl5);f.add(pl6); 
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true); 
+        Scanner input = new Scanner(System.in);
+        System.out.print("id:-");
+        pid = input.nextInt();
+        System.out.print("name:-");
+        pname = input.nextLine();
+        System.out.print("disease:-");
+        disease = input.nextLine();
+        System.out.print("sex:-");
+        sex = input.nextLine();
+        System.out.print("admit_status:-");
+        admit_status = input.nextLine();
+        System.out.print("age:-");
+        age = input.nextInt();
+    }
+    void patient_info()
+    {
+        System.out.println(pid + "\t" + pname + " \t" + disease + "     \t" + sex + "      \t" + admit_status + "\t" + age);
+    
+       
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into patient "
+			+ " (pid,pname , disease,sex,admit_status,age)" + " values (?, ?, ?, ?, ?, ?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	// set param values
+	myStmt.setInt(1, pid);
+	myStmt.setString(2, pname);
+	myStmt.setString(3, disease);
+        myStmt.setString(4, sex);
+        myStmt.setString(5, admit_status);
+        myStmt.setInt(6, age); 
+	// 3. Execute SQL query
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+}
+}
+class medical
+{
+    String med_name, med_comp, exp_date;
+    int med_cost, count;
+    void new_medi()
+    {
+        JTextField mf1,mf2,mf3,mf4,ml5;  
+        JButton b1;
+         JLabel ml1,ml2,ml3,ml4,ml5; 
+        JFrame f= new JFrame();    
+        TextFieldExample(){  
+              ml1=new JLabel("name:-");  
+    ml1.setBounds(50,50, 100,30);  
+            mf1=new JTextField();  
+            mf1.setBounds(50,50,150,20);  
+              ml2=new JLabel("comp:-");  
+    ml2.setBounds(50,50, 100,30);  
+            mf2=new JTextField();  
+            mf2.setBounds(50,100,150,20); 
+               ml3=new JLabel("exp_date:-");  
+    ml3.setBounds(50,50, 100,30);  
+            mf3=new JTextField();  
+            mf3.setBounds(50,150,150,20);
+                ml4=new JLabel("cost:-");  
+    ml4.setBounds(50,50, 100,30);  
+            mf4=new JTextField();
+            mf4.setBounds(50,200,150,20);   
+             ml5=new JLabel("no of unit:-");  
+    ml5.setBounds(50,50, 100,30);  
+            mf5=new JTextField();
+            mf5.setBounds(50,200,150,20);  
+            b1=new JButton("submit");  
+            b1.setBounds(50,250,50,50);  
+            b1.addActionListener(this);  
+            f.add(mf1);f.add(mf2);f.add(mf3);f.add(mf4);f.add(mf5);f.add(b1);f.add(ml1);f.add(ml2);f.add(ml3);f.add(ml4);f.add(ml5);
+            f.setSize(300,300);  
+            f.setLayout(null);  
+            f.setVisible(true);  
+        Scanner input = new Scanner(System.in);
+        System.out.print("name:-");
+        med_name = input.nextLine();
+        System.out.print("comp:-");
+        med_comp = input.nextLine();
+        System.out.print("exp_date:-");
+        exp_date = input.nextLine();
+        System.out.print("cost:-");
+        med_cost = input.nextInt();
+        System.out.print("no of unit:-");
+        count = input.nextInt();
+    }
+    void find_medi()
+    {
+        System.out.println(med_name + "  \t" + med_comp + "    \t" + exp_date + "     \t" + med_cost);
+    
+       
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into medical "
+			+ " (med_name, med_comp, exp_date, med_cost, count)" + " values (?, ?, ?, ?, ?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	// set param values
+	myStmt.setString(1, med_name);
+	myStmt.setString(2, med_comp);
+        myStmt.setString(3, exp_date);
+        myStmt.setInt(4, med_cost);
+        myStmt.setInt(5, count);  
+	// 3. Execute SQL query
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+}
+}
+class lab
+{
+    String fecility;
+    int lab_cost;
+    void new_feci()
+    {
+         JTextField lf1,lf2;  
+    JButton b1;
+      JLabel il1,il2; 
+    JFrame f= new JFrame();    
+    TextFieldExample(){  
+          il1=new JLabel("fecility:-");  
+    il1.setBounds(50,50, 100,30);  
+        lf1=new JTextField();  
+        lf1.setBounds(50,50,150,20); 
+           il2=new JLabel("cost:-");  
+    il2.setBounds(50,50, 100,30);  
+        lf2=new JTextField();  
+        lf2.setBounds(50,100,150,20);  
+        b1=new JButton("submit");  
+        b1.setBounds(50,250,50,50);  
+        b1.addActionListener(this);  
+        f.add(lf1);f.add(lf2);f.add(b1);f.add(il1);f.add(il2);  
+        f.setSize(300,300);  
+        f.setLayout(null);  
+        f.setVisible(true);  
+        Scanner input = new Scanner(System.in);
+        System.out.print("fecility:-");
+        fecility = input.nextLine();
+        System.out.print("cost:-");
+        lab_cost = input.nextInt();
+    }
+    void feci_list()
+    {
+        System.out.println(fecility + "\t\t" + lab_cost);
+    
+       
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into lab"
+			+ " (fecility, lab_cost)" + " values (?, ?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	// set param values
+	myStmt.setString(1, fecility);
+	myStmt.setInt(2, lab_cost);
+
+	// 3. Execute SQL query
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+}
+}
+class fecility  
+{
+    String fec_name;
+    void add_feci()
+    {
+        JTextField cf1;  
+        JButton b1;
+  JLabel cl1; 
+        JFrame f= new JFrame();    
+        TextFieldExample(){  
+              cl1=new JLabel("fecility:-");  
+    cl1.setBounds(50,50, 100,30);  
+            cf1=new JTextField();  
+            cf1.setBounds(50,50,150,20);  
+            b1=new JButton("submit");  
+            b1.setBounds(50,250,50,50);  
+            b1.addActionListener(this);  
+            f.add(cf1);f.add(b1);f.add(cl1);  
+            f.setSize(300,300);  
+            f.setLayout(null);  
+            f.setVisible(true);
+        Scanner input = new Scanner(System.in);
+        System.out.print("fecility:-");
+        fec_name = input.nextLine();
+    }
+    void show_feci()
+    {
+        System.out.println(fec_name);
+    
+   
+        try{  
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/demodb","root","");
+        System.out.println("Database connection is successful !!!!");
+        String sql = "insert into fecility "
+			+ " (fec_name)" + " values (?)";
+
+	PreparedStatement myStmt = con.prepareStatement(sql);
+
+	// set param values
+	myStmt.setString(1, fec_name);
+	
+
+	// 3. Execute SQL query
+	myStmt.executeUpdate();
+        con.close();   
+       }
+       catch(Exception x){
+System.out.println("Error");
+
+}
+}
+}
+public class HospitalManagement
+{
+    public static void main(String args[])
+    {
+        String months[] = {
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        };
+        Calendar calendar = Calendar.getInstance();
+        //System.out.println("--------------------------------------------------------------------------------");
+        int count1 = 4, count2 = 4, count3 = 4, count4 = 4, count5 = 4, count6 = 4;
+        System.out.println("\n--------------------------------------------------------------------------------");
+        System.out.println("            * Welcome to Hospital Management System Project in Java *");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.print("Date: " + months[calendar.get(Calendar.MONTH)] + " " + calendar.get(Calendar.DATE) + " " + calendar.get(Calendar.YEAR));
+        System.out.println("\t\t\t\t\t\tTime: " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND));
+        doctor[] d = new doctor[25];
+        patient[] p = new patient[100];
+        lab[] l = new lab[20];
+        fecility[] f = new fecility[20];
+        medical[] m = new medical[100];
+        staff[] s = new staff[100];
+        int i;
+        for (i = 0; i < 25; i++)
+            d[i] = new doctor();
+        for (i = 0; i < 100; i++)
+            p[i] = new patient();
+        for (i = 0; i < 20; i++)
+            l[i] = new lab();
+        for (i = 0; i < 20; i++)
+            f[i] = new fecility();
+        for (i = 0; i < 100; i++)
+            m[i] = new medical();
+        for (i = 0; i < 100; i++)
+            s[i] = new staff();
+
+        d[0].did = 21;
+        d[0].dname = "Dr.Ghanendra";
+        d[0].specilist = "ENT";
+        d[0].appoint = "5-11AM";
+        d[0].doc_qual = "MBBS,MD";
+        d[0].droom = 17;
+        d[1].did = 32;
+        d[1].dname = "Dr.Vikram";
+        d[1].specilist = "Physician";
+        d[1].appoint = "10-3AM";
+        d[1].doc_qual = "MBBS,MD";
+        d[1].droom = 45;
+        d[2].did = 17;
+        d[2].dname = "Dr.Rekha";
+        d[2].specilist = "Surgeon";
+        d[2].appoint = "8-2AM";
+        d[2].doc_qual = "BDM";
+        d[2].droom = 8;
+        d[3].did = 33;
+        d[3].dname = "Dr.Pramod";
+        d[3].specilist = "Artho";
+        d[3].appoint = "10-4PM";
+        d[3].doc_qual = "MBBS,MS";
+        d[3].droom = 40;
+
+        p[0].pid = 12;
+        p[0].pname = "Pankaj";
+        p[0].disease = "Cancer";
+        p[0].sex = "Male";
+        p[0].admit_status = "y";
+        p[0].age = 30;
+        p[1].pid = 13;
+        p[1].pname = "Sumit";
+        p[1].disease = "Cold";
+        p[1].sex = "Male";
+        p[1].admit_status = "y";
+        p[1].age = 23;
+        p[2].pid = 14;
+        p[2].pname = "Alok";
+        p[2].disease = "Maleriya";
+        p[2].sex = "Male";
+        p[2].admit_status = "y";
+        p[2].age = 45;
+        p[3].pid = 15;
+        p[3].pname = "Ravi";
+        p[3].disease = "Diabetes";
+        p[3].sex = "Male";
+        p[3].admit_status = "y";
+        p[3].age = 25;
+
+        m[0].med_name = "Corex";
+        m[0].med_comp = "Cino pvt";
+        m[0].exp_date = "9-5-16";
+        m[0].med_cost = 55;
+        m[0].count = 8;
+        m[1].med_name = "Nytra";
+        m[1].med_comp = "Ace pvt";
+        m[1].exp_date = "4-4-15";
+        m[1].med_cost = 500;
+        m[1].count = 5;
+        m[2].med_name = "Brufa";
+        m[2].med_comp = "Reckitt";
+        m[2].exp_date = "12-7-17";
+        m[2].med_cost = 50;
+        m[2].count = 56;
+        m[3].med_name = "Pride";
+        m[3].med_comp = "DDF pvt";
+        m[3].exp_date = "12-4-12";
+        m[3].med_cost = 1100;
+        m[3].count = 100;
+
+        l[0].fecility = "X-ray     ";
+        l[0].lab_cost = 800;
+        l[1].fecility = "CT Scan   ";
+        l[1].lab_cost = 1200;
+        l[2].fecility = "OR Scan   ";
+        l[2].lab_cost = 500;
+        l[3].fecility = "Blood Bank";
+        l[3].lab_cost = 50;
+
+        f[0].fec_name = "Ambulance";
+        f[1].fec_name = "Admit Facility ";
+        f[2].fec_name = "Canteen";
+        f[3].fec_name = "Emergency";
+
+        s[0].sid = 22;
+        s[0].sname = "Prakash";
+        s[0].desg = "Worker";
+        s[0].sex = "Male";
+        s[0].salary = 5000;
+        s[1].sid = 23;
+        s[1].sname = "Komal";
+        s[1].desg = "Nurse";
+        s[1].sex = "Female";
+        s[1].salary = 2000;
+        s[2].sid = 24;
+        s[2].sname = "Raju";
+        s[2].desg = "Worker";
+        s[2].sex = "Male";
+        s[2].salary = 5000;
+        s[3].sid = 25;
+        s[3].sname = "Rani";
+        s[3].desg = "Nurse";
+        s[3].sex = "Female";
+        s[3].salary = 20000;
+
+        Scanner input = new Scanner(System.in);
+        int choice, j, c1, status = 1, s1 = 1, s2 = 1, s3 = 1, s4 = 1, s5 = 1, s6 = 1;
+        while (status == 1)
+        {
+            System.out.println("\n                                    MAIN MENU");
+            System.out.println("-----------------------------------------------------------------------------------");
+            System.out.println("1.Doctos  2. Patients  3.Medicines  4.Laboratories  5. Facilities  6. Staff ");
+            System.out.println("-----------------------------------------------------------------------------------");
+            choice = input.nextInt();
+            switch (choice)
+            {
+                case 1:
+                    {
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("                      *DOCTOR SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        s1 = 1;
+                        while (s1 == 1)
+                        {
+                            System.out.println("1.Add New Entry\n2.Existing Doctors List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        d[count1].new_doctor();count1++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("id \t Name\t Specilist \t Timing \t Qualification \t Room No.");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count1; j++)
+                                        {
+                                            d[j].doctor_info();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s1 = input.nextInt();
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("                     *PATIENT SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        s2 = 1;
+                        while (s2 == 1)
+                        {
+                            System.out.println("1.Add New Entry\n2.Existing Patients List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        p[count2].new_patient();count2++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("id \t Name \t Disease \t Gender \t Admit Status \t Age");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count2; j++) {
+                                            p[j].patient_info();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s2 = input.nextInt();
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        s3 = 1;
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("                     *MEDICINE SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        while (s3 == 1)
+                        {
+                            System.out.println("1.Add New Entry\n2. Existing Medicines List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        m[count3].new_medi();count3++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("Name \t Company \t Expiry Date \t Cost");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count3; j++) {
+                                            m[j].find_medi();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s3 = input.nextInt();
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        s4 = 1;
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("                    *LABORATORY SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        while (s4 == 1)
+                        {
+                            System.out.println("1.Add New Entry \n2.Existing Laboratories List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        l[count4].new_feci();count4++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("Fecilities\t\t Cost");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count4; j++) {
+                                            l[j].feci_list();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s4 = input.nextInt();
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        s5 = 1;
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("          *HOSPITAL FACILITY SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        while (s5 == 1)
+                        {
+                            System.out.println("1.Add New Facility\n2.Existing Fecilities List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        f[count5].add_feci();count5++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("Hospital  Facility are:");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count5; j++) {
+                                            f[j].show_feci();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s5 = input.nextInt();
+                        }
+                        break;
+                    }
+                case 6:
+                    {
+                        s6 = 1;
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("                       *STAFF SECTION*");
+                        System.out.println("--------------------------------------------------------------------------------");
+                        while (s6 == 1)
+                        {
+                            String a = "nurse", b = "worker", c = "security";
+                            System.out.println("1.Add New Entry \n2.Existing Nurses List\n3.Existing Workers List \n4.Existing Security List");
+                            c1 = input.nextInt();
+                            switch (c1)
+                            {
+                                case 1:
+                                    {
+                                        s[count6].new_staff();count6++;
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("id \t Name \t Gender \t Salary");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count6; j++)
+                                        {
+                                            if (a.equals(s[j].desg))
+                                                s[j].staff_info();
+                                        }
+                                        break;
+                                    }
+                                case 3:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("id \t Name \t Gender \t Salary");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count6; j++)
+                                        {
+                                            if (b.equals(s[j].desg))
+                                                s[j].staff_info();
+                                        }
+                                        break;
+                                    }
+                                case 4:
+                                    {
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        System.out.println("id \t Name \t Gender \t Salary");
+                                        System.out.println("--------------------------------------------------------------------------------");
+                                        for (j = 0; j < count6; j++)
+                                        {
+                                            if (c.equals(s[j].desg))
+                                                s[j].staff_info();
+                                        }
+                                        break;
+                                    }
+                            }
+                            System.out.println("\nReturn to Back Press 1 and for Main Menu Press 0");
+                            s6 = input.nextInt();
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        System.out.println(" You Have Enter Wrong Choice!!!");
+                    }
+            }
+            System.out.println("\nReturn to MAIN MENU Press 1");
+            status = input.nextInt();
+        }
+    }
+}
